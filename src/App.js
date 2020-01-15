@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react'
+import './App.css'
 
 function App() {
+
+  const [text, setText] = useState("")
+    
+  function handleChange(event) {
+      const {value} = event.target
+      setText(value)
+  }
+
+  function calculateWords() {
+    // trim removes all whitespace
+    const words = text.trim().split(" ")
+    console.log(words.length)
+    return words.length
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <div>
+          <h1>Speed typing game</h1>
+          <textarea 
+            onChange={handleChange} 
+            value={text}
+          />
+          <h2>Time remaining: 5</h2>
+          <button onClick={calculateWords}>start game</button>
+          <h1>Word count: 0</h1>
+      </div>
+  )
 }
 
-export default App;
+export default App
